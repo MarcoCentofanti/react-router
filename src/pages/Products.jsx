@@ -11,8 +11,7 @@ export default function Products() {
     axios.get("https://fakestoreapi.com/products")
       .then(res => {
         setProductsData(res.data)
-        console.log(productsData)
-        console.log(res.data)
+
       })
 
       // .catch(alert("Server Problem"))
@@ -23,7 +22,7 @@ export default function Products() {
   return (
     <div className="container">
       {productsData.map(singleProduct => (
-        <ProductCard  singleProduct={singleProduct} />
+        <ProductCard key={singleProduct.id}  singleProduct={singleProduct} />
        
       ))}
     </div>

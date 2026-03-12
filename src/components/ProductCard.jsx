@@ -1,8 +1,18 @@
+import { Link } from "react-router-dom"
+
+
 export default function ProductCard({singleProduct}) {
+
+
   return (
     <div className="d-flex box" key={singleProduct.id}>
       <div>
-      <img className="productImage me-5" src={singleProduct.image} alt="" />
+        <img className="productImage me-5" src={singleProduct.image} alt="" />
+        <Link 
+          to={`/Products/${singleProduct.id}`} 
+          className="btn btn-secondary productButton">
+            Scopri di più
+        </Link>
       </div>
       <div>
       <h3>{singleProduct.title} <span className="category">({singleProduct.category})</span></h3>

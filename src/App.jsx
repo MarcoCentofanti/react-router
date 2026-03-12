@@ -7,6 +7,7 @@ import './App.css'
 import Homepage from './pages/Homepage';
 import Products from './pages/Products';
 import About from './pages/About';
+import ProductPage from './pages/ProductPage';
 import DefaultLayout from './layouts/DefaultLayout';
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route element={<DefaultLayout/>}>
           <Route path='/' element={<Homepage/>} />
           <Route path='/Products' element={<Products/>} />
+          <Route path='/Products/:id' element={<ProductPage/>} />
           <Route path='/About' element={<About/>} />
         </Route>
       </Routes>
