@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
+
 
 
 
@@ -8,15 +9,28 @@ import { useParams } from "react-router-dom"
 export default function ProductPage() {
   const [singleProduct, setSingleProduct] = useState({})
   const {id} = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios.get(`https://fakestoreapi.com/products/${id}`)
       .then(res => {
         // console.log(res)
-        console.log(id)
-        setSingleProduct(res.data)
+        if (res.data === "") {
+          navigate(-1)
+          alert("Prodotto inesistente")
 
+        } else {
+          console.log("Status:", res.status)
+          console.log("DATA:", res.data)
+          console.log(id)
+          setSingleProduct(res.data)
+        }
       })
+      .catch((err) => {
+        console.error("ERRORE:", err)
+        navigate(-1)
+      }
+    )
 
       // .catch(alert("Server Problem"))
   }, [id])
