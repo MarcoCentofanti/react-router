@@ -2,9 +2,10 @@ import { Link, NavLink } from "react-router-dom";
 import { useBudget } from "../contexts/BudgetContext";
 
 export default function Navbar() {
+  const { budgetMode, setBudgetMode } = useBudget();
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-md bg-body-tertiary">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to="/">
             Compra.com
@@ -37,6 +38,12 @@ export default function Navbar() {
                 </NavLink>
               </li>
             </ul>
+            <button
+              onClick={() => setBudgetMode(!budgetMode)}
+              className="btn btn-light"
+            >
+              {budgetMode ? "Disattiva Budget Mode" : "Attiva Budget Mode"}
+            </button>
             <form className="d-flex" role="search">
               <input
                 className="form-control me-2"
