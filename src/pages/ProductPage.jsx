@@ -10,8 +10,10 @@ export default function ProductPage() {
   const [singleProduct, setSingleProduct] = useState({})
   const {id} = useParams()
   const navigate = useNavigate()
+  const [loader, setLoader] = useState(true)
 
   useEffect(() => {
+    setLoader(true)
     axios.get(`https://fakestoreapi.com/products/${id}`)
       .then(res => {
         // console.log(res)
@@ -29,8 +31,8 @@ export default function ProductPage() {
       .catch((err) => {
         console.error("ERRORE:", err)
         navigate(-1)
-      }
-    )
+      })
+      .finally(() => setLoader(false))
 
       // .catch(alert("Server Problem"))
   }, [id])
@@ -41,10 +43,25 @@ export default function ProductPage() {
 
 
   return (
-    <div className="d-flex box" key={singleProduct.id}>
+    <div className="d-flex box container" key={singleProduct.id}>
+      
       <div>
-        <img className="productImage me-5" src={singleProduct.image} alt="" />
-        <button className="btn btn-secondary productButton">Scopri di più</button>
+
+        {loader?<div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+          </div>:<img className="productImage me-5" src={singleProduct.image} alt="" />}
+        
+        <div className="d-flex row">
+        <button 
+        onClick={() => 
+        navigate(`${(id - 1)}`)} 
+        className="btn btn-secondary col-5">←</button>
+        <button 
+        onClick={() => 
+        navigate(+1)} className="btn btn-secondary col-5">→</button>
+
+
+        </div>
       </div>
       <div>
       <h3>{singleProduct.title} <span className="category">({singleProduct.category})</span></h3>
