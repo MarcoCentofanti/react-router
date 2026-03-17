@@ -5,7 +5,7 @@ import axios from "axios"
 import ProductCard from "../components/ProductCard"
 
 export default function Products() {
-  const { budgetMode, setBudgetMode } = useBudget();
+  const { budgetMode, setBudgetMode } = useBudget()
   const [productsData, setProductsData] = useState([])
 
   useEffect(() => {

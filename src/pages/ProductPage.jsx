@@ -5,14 +5,14 @@ import { useParams, useNavigate } from "react-router-dom";
 export default function ProductPage() {
   const [singleProduct, setSingleProduct] = useState({});
   const { id } = useParams();
-  const [page, setPage] = useState("");
+  const productId = Number(id)
   const navigate = useNavigate();
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     setLoader(true);
     axios
-      .get(`https://fakestoreapi.com/products/${id}`)
+      .get(`https://fakestoreapi.com/products/${productId}`)
       .then((res) => {
         // console.log(res)
         if (res.data === "") {
@@ -29,7 +29,16 @@ export default function ProductPage() {
       .finally(() => setLoader(false));
 
     // .catch(alert("Server Problem"))
-  }, [id, navigate]);
+  }, [productId, navigate]);
+
+  function goPrev() {
+    if (productId > 1) {
+      navigate(`/Products/${productId - 1}`)
+  }}
+
+  function goNext() {
+    navigate(`/Products/${productId + 1}`)
+  }
 
   return (
     <div className="d-flex box container" key={singleProduct.id}>
@@ -44,14 +53,14 @@ export default function ProductPage() {
 
         <div className="d-flex row">
           <button
-            onClick={() => console.log("ciao")}
+            onClick={() => goPrev()}
             className="btn btn-secondary col-5"
-            disable={id === 1}
+            disabled={id === 1}
           >
             ←
           </button>
           <button
-            onClick={() => console.log("ciao")}
+            onClick={() => goNext()}
             className="btn btn-secondary col-5"
           >
             →

@@ -5,9 +5,11 @@ export default function ProductCard({singleProduct}) {
 
 
   return (
-    <div className="d-flex box" key={singleProduct.id}>
-      <div>
-        <img className="productImage me-5" src={singleProduct.image} alt="" />
+    <div className="box product-card" key={singleProduct.id}>
+      <div className="product-media">
+        <img  
+          className="productImage me-5" 
+          src={singleProduct.image} alt="" />
         <Link 
           to={`/Products/${singleProduct.id}`} 
           className="btn btn-secondary productButton">
